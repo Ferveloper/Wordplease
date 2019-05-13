@@ -2,5 +2,4 @@ venv/
 .idea/
 .vscode/
 */__pycache__/
-*/migrations/
 *.sqlite3
