@@ -16,6 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from posts.views import LatestPostsView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Users
+    # path('login/', login, name='login'),
+    # path('logout/', logout, name='logout'),
+    # Blogs
+    # path('blogs/', blogs_list, name='blogs_list'),
+    # path('blogs/<str:username>/', user_blog, name='user_blog'),
+    # path('blogs/<str:username>/<int:pk>', user_post, name='user_post'),
+    # Posts
+    path('', LatestPostsView.as_view(), name='home'),
+    # path('new/', new_post, name='new_post')
 ]

@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block head_title %} Wordplease {% endblock %}</title>
+<!--    Stylesheets-->
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h3>Wordplease</h3>
+            <hr>
+            <nav>
+                <a href="{% url 'home' %}">Home</a> |
+                <a href="{% url 'home' %}">All posts</a> |
+                {% if user.is_authenticated %}
+                    <a href="{% url 'home' %}">New post</a> |
+                    <a href="{% url 'home' %}">Logout</a>
+                {% else %}
+                    <a href="{% url 'home' %}">Login</a>
+                {% endif %}
+            </nav>
+            <hr>
+        </header>
+
+        <main>
+            <h1>{% block main_title %}{% endblock %}</h1>
+            <div>{% block main_content %}{% endblock %}</div>
+        </main>
+
+        <footer>
+            <hr>
+            Wordplease &copy; {% now 'Y' %}. All rights reserved.
+        </footer>
+    </div>
+<!--Scripts-->
+</body>
+</html>

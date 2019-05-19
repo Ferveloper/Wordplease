@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block main_title %} Wordplease {% endblock %}
+
+{% block main_content %}
+    <h2>Latest posts</h2>
+    {% for post in latest_posts %}
+    <h1>{{post.title}}</h1>
+    <img src={{post.url}} alt={{post.title}} title="{{ post.name }} by {{ post.owner.first_name }} {{ post.owner.last_name }}" height="200">
+    <p>Por {{post.owner.first_name}} {{post.owner.first_name}}</p>
+    <p>Publicado {{post.publication_date}}</p>
+    <p>Categorías:
+        {% for category in post.categories.all %}
+        <span>{{category.name}}</span>
+        {% endfor %}
+    </p>
+    <p>{{post.introduction}}</p>
+    {% endfor %}
+{% endblock %}
