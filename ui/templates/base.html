@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block head_title %} Wordplease {% endblock %}</title>
-<!--    Stylesheets-->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <div class="container">
@@ -13,7 +13,7 @@
             <hr>
             <nav>
                 <a href="{% url 'home' %}">Home</a> |
-                <a href="{% url 'home' %}">All posts</a> |
+                <a href="{% url 'blogs_list' %}">Blogs</a> |
                 {% if user.is_authenticated %}
                     <a href="{% url 'home' %}">New post</a> |
                     <a href="{% url 'home' %}">Logout</a>
@@ -34,6 +34,5 @@
             Wordplease &copy; {% now 'Y' %}. All rights reserved.
         </footer>
     </div>
-<!--Scripts-->
 </body>
 </html>

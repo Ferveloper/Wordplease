@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block main_title %} Wordplease {% endblock %}
+
+{% block main_content %}
+    <h2>Blogs:</h2>
+    <ul>
+        {% for user in blogs %}
+        <li><a href="{% url 'user_blog' user.username %}">Blog de {{user.first_name}} {{user.last_name}}</a></li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
