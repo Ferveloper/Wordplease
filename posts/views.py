@@ -1,9 +1,13 @@
 import datetime
 
+from django.contrib import messages
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 
+from posts.forms import NewPostForm
 from posts.models import Post
 
 
@@ -39,3 +43,34 @@ class PostDetailView(View):
         # Return HTP response
         return HttpResponse(html)
 
+
+class NewPostView(View):
+
+    def render_template_with_form(self, request, form):
+        context = {'form': form}
+        return render(request, 'posts/new_post.html', context)
+
+    def get(self, request):
+        if request.user.is_authenticated is False:
+            return redirect('home')
+
+        form = NewPostForm()
+        return self.render_template_with_form(request, form)
+
+    def post(self, request):
+        if request.user.is_authenticated is False:
+            return redirect('home')
+
+        form = NewPostForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data.get('title')
+            url = form.cleaned_data.get('url')
+            introduction = form.cleaned_data.get('intro')
+            body = form.cleaned_data.get('body')
+            publication_date = form.cleaned_data.get('pub_date')
+            post = Post(owner=User.objects.get(username=request.user.username), title=title, url=url, introduction=introduction, body=body, publication_date=publication_date)
+            post.save()
+            url = request.GET.get('next', 'home')
+            return redirect(url)
+
+        return self.render_template_with_form(request, form)
