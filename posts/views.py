@@ -35,7 +35,7 @@ class PostDetailView(View):
         post = get_object_or_404(Post.objects.select_related('owner'), pk=pk)
 
         # Create context
-        context = {'post': post}
+        context = {'post': post, 'owner': username}
 
         # Crete HTTP response with posts
         html = render(request, 'posts/detail.html', context)

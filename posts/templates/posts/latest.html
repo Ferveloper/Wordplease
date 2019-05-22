@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 
-{% block main_title %} Wordplease {% endblock %}
+{% block main_title %} Últimos Posts {% endblock %}
 
 {% block main_content %}
-    <h2>Latest posts</h2>
     {% for post in latest_posts %}
-    <h1>{{post.title}}</h1>
-    <img src={{post.url}} alt={{post.title}} title="{{ post.name }} by {{ post.owner.first_name }} {{ post.owner.last_name }}" height="200">
+    <a href="{% url 'user_post' post.owner.username post.pk %}">
+        <h1>{{post.title}}</h1>
+        <img src={{post.url}} alt={{post.title}} title="{{ post.name }} by {{ post.owner.first_name }} {{ post.owner.last_name }}" height="200">
+    </a>
     <p>Por {{post.owner.first_name}} {{post.owner.last_name}}</p>
     <p>Publicado {{post.publication_date}}</p>
     <p>Categorías:

@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
-{% block head_title %} {{ post.title }} {% endblock %}
+{% block head_title %} Wordplease | {{ post.title }} {% endblock %}
 
-{% block main_title %} {{ post.title }} {% endblock %}
+{% block main_title %} Blog de {{ post.owner.first_name }} {{ post.owner.last_name }}{% endblock %}
 
 {% block main_content %}
-      <h1>{{post.title}}</h1>
+        <h1>{{post.title}}</h1>
         <img src={{post.url}} alt={{post.title}} title="{{ post.name }} by {{ post.owner.first_name }} {{ post.owner.last_name }}" height="200">
         <p>Por {{post.owner.first_name}} {{post.owner.last_name}}</p>
         <p>Publicado {{post.publication_date}}</p>

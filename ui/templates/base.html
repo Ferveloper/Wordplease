@@ -19,7 +19,7 @@
                     <a href="{% url 'logout' %}">Logout</a> |
                     <span>Hola, {{user.first_name}}</span>
                 {% else %}
-                     <a href="{% url 'signup' %}">Sign up</a> |
+                    <a href="{% url 'signup' %}">Sign up</a> |
                     <a href="{% url 'login' %}">Login</a>
                 {% endif %}
             </nav>
