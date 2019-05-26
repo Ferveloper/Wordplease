@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import status
-from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework.generics import get_object_or_404, ListAPIView
+from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
@@ -45,26 +44,6 @@ class UsersViewSet(GenericViewSet):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-# class BlogsListAPIView(ListAPIView):
-#
-#     # queryset = User.objects.all()
-#     serializer_class = BlogSerializer
-#     filter_backends = [SearchFilter, OrderingFilter]
-#     search_fields = ['username']
-#     ordering_fields = ['first_name']
-#
-#     def get_queryset(self):
-#         users = User.objects.all().exclude(username='admin')
-#         queryset = []
-#         for user in users:
-#             queryset.append({
-#                 'first_name' : user.first_name,
-#                 'last_name' : user.last_name,
-#                 'username' : user.username,
-#                 'url' : '/blogs/' + user.username
-#             })
-#         return queryset
 
 class BlogsListAPIView(GenericViewSet):
 

@@ -51,3 +51,4 @@ class BlogSerializer(serializers.Serializer):
     name = serializers.CharField()
     username = serializers.CharField()
     url = serializers.CharField()
+    

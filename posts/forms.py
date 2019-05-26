@@ -1,16 +1,9 @@
-import datetime
-
 from django import forms
-from django.forms import ModelForm
 
 from posts.models import Category, Post
 
 
 class NewPostForm(forms.Form):
-
-    # class Meta:
-    #     model = Post
-    #     fields = ['title', 'url', 'introduction', 'body', 'publication_date', 'categories']
 
     title = forms.CharField(label='Título')
     url = forms.URLField(label='URL de imagen')
