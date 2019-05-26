@@ -34,18 +34,15 @@ class UserPostsAPIView(ListAPIView):
     search_fields = ['title', 'introduction']
     ordering_fields = ['title', 'publication_date']
     ordering = ['-publication_date']
+    serializer_class = PostListSerializer
 
-    def get(self, request, username):
+    def get_queryset(self):
 
-        blog_posts = Post.objects.filter(owner__username=username).select_related('owner')
+        user = self.request.user
+        username = self.kwargs.get('username')
+        query_set = Post.objects.filter(owner__username=username).select_related('owner')
 
-        user = request.user
         if not user.is_authenticated or (user.username != username and not user.is_superuser):
-            blog_posts = blog_posts.filter(publication_date__lte=datetime.datetime.now())
+            query_set = query_set.filter(publication_date__lte=datetime.datetime.now())
 
-        response = []
-        for post in blog_posts:
-            serializer = PostListSerializer(post)
-            response.append(serializer.data)
-
-        return Response(response)
+        return query_set
