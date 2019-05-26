@@ -1,17 +1,18 @@
 import datetime
 
 from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from posts.models import Post
-from posts.permissions import PostPermission
+from posts.permissions import PostPermission, BlogPermission
 from posts.serializers import PostListSerializer, PostSerializer
 
 
 class PostsViewSet(ModelViewSet):
 
-    # permission_classes = [PostPermission]
+    permission_classes = [PostPermission]
     # filter_backends = [SearchFilter, OrderingFilter]
     # search_fields = ['title', 'introduction']
     # ordering_fields = ['title', 'publication_date']
@@ -30,3 +31,17 @@ class PostsViewSet(ModelViewSet):
 
     def list(self, request):
         return Response({"detail": "Method \"GET\" not allowed."}, status=403)
+
+class UserPostsAPIView(ListAPIView):
+
+    permission_classes = [BlogPermission]
+    serializer_class = PostListSerializer
+    filter_backends = [SearchFilter, OrderingFilter]
+    search_fields = ['title', 'introduction']
+    ordering_fields = ['title', 'publication_date']
+    ordering = ['-publication_date']
+
+    def get_queryset(self):
+        username = self.kwargs['username']
+        queryset = Post.objects.filter(owner__username=username).select_related('owner')
+        return queryset

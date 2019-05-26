@@ -17,11 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from rest_framework.routers import SimpleRouter
 
-from posts.api import PostsViewSet
+from posts.api import PostsViewSet, UserPostsAPIView
 from posts.views import LatestPostsView, PostDetailView, NewPostView
 from users.api import UsersViewSet, BlogsListAPIView
 from users.views import BlogsListView, BlogView, LoginView, LogoutView, SignupView
 
+# API
 router = SimpleRouter()
 router.register('api/posts', PostsViewSet, basename='posts_api')
 router.register('api/users', UsersViewSet, basename='users_api')
@@ -40,5 +41,7 @@ urlpatterns = [
     # Posts
     path('', LatestPostsView.as_view(), name='home'),
     path('new/', NewPostView.as_view(), name='new_post'),
+    # API
+    path('api/blogs/<str:username>', UserPostsAPIView.as_view(), name='user_posts')
 ] + router.urls
 
