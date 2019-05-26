@@ -26,7 +26,6 @@ from users.views import BlogsListView, BlogView, LoginView, LogoutView, SignupVi
 router = SimpleRouter()
 router.register('api/posts', PostsViewSet, basename='posts_api')
 router.register('api/users', UsersViewSet, basename='users_api')
-router.register('api/blogs', BlogsListAPIView, basename='blogs_api')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -42,5 +41,6 @@ urlpatterns = [
     path('', LatestPostsView.as_view(), name='home'),
     path('new/', NewPostView.as_view(), name='new_post'),
     # API
-    path('api/posts/<str:username>', UserPostsAPIView.as_view(), name='user_posts')
+    path('api/blogs/', BlogsListAPIView.as_view(), name='blogs_api'),
+    path('api/blogs/<str:username>', UserPostsAPIView.as_view(), name='user_posts')
 ] + router.urls

@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import status
-from rest_framework.generics import get_object_or_404
+from rest_framework.generics import get_object_or_404, GenericAPIView
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
@@ -45,9 +45,9 @@ class UsersViewSet(GenericViewSet):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class BlogsListAPIView(GenericViewSet):
+class BlogsListAPIView(GenericAPIView):
 
-    def list(self, request):
+    def get(self, request):
         users = User.objects.all().exclude(username='admin')
 
         if 'search' in request.query_params:

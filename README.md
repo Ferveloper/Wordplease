@@ -25,7 +25,7 @@ Wordplease is a Python/Django blogging platform to provide valuable content to e
 | `/api/users/<pk>` | PUT | Update user | Admin and Owner |
 | `/api/users/<pk>` | DELETE | Delete user | Admin and Owner |
 | `/api/blogs/` | GET | Blogs list | Any |
-| `/api/posts/<username>` | GET | User blog posts | Any |
+| `/api/blogs/<username>` | GET | User blog posts | Any |
 | `/api/posts/` | POST | Create post | Owner |
 | `/api/posts/<pk>` | GET | Post detail | Any |
 | `/api/posts/<pk>` | PUT | Update post | Admin and Owner |

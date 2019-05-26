@@ -59,9 +59,11 @@ class NewPostView(View):
             url = form.cleaned_data.get('url')
             introduction = form.cleaned_data.get('intro')
             body = form.cleaned_data.get('body')
+            categories = form.cleaned_data.get('categories')
             publication_date = form.cleaned_data.get('pub_date')
             post = Post(owner=User.objects.get(username=request.user.username), title=title, url=url, introduction=introduction, body=body, publication_date=publication_date)
             post.save()
+            post.categories.set(categories)
             url = request.GET.get('next', 'home')
             return redirect(url)
 
