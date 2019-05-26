@@ -11,7 +11,7 @@ from posts.serializers import PostListSerializer, PostSerializer
 
 class PostsViewSet(ModelViewSet):
 
-    permission_classes = [PostPermission]
+    # permission_classes = [PostPermission]
     # filter_backends = [SearchFilter, OrderingFilter]
     # search_fields = ['title', 'introduction']
     # ordering_fields = ['title', 'publication_date']

@@ -44,3 +44,10 @@ class WriteUserSerializer(UserSerializer):
         instance.email = validated_data.get('email')
         instance.save()
         return instance
+
+
+class BlogSerializer(serializers.Serializer):
+
+    name = serializers.CharField()
+    username = serializers.CharField()
+    url = serializers.CharField()

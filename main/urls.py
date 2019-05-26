@@ -19,12 +19,13 @@ from rest_framework.routers import SimpleRouter
 
 from posts.api import PostsViewSet
 from posts.views import LatestPostsView, PostDetailView, NewPostView
-from users.api import UsersViewSet
+from users.api import UsersViewSet, BlogsListAPIView
 from users.views import BlogsListView, BlogView, LoginView, LogoutView, SignupView
 
 router = SimpleRouter()
 router.register('api/posts', PostsViewSet, basename='posts_api')
 router.register('api/users', UsersViewSet, basename='users_api')
+router.register('api/blogs', BlogsListAPIView, basename='blogs_api')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -38,8 +39,6 @@ urlpatterns = [
     path('blogs/<str:username>/<int:pk>', PostDetailView.as_view(), name='user_post'),
     # Posts
     path('', LatestPostsView.as_view(), name='home'),
-    path('new/', NewPostView.as_view(), name='new_post')
-    #API
-    # path('api/blogs/', BlogAPIView.as_view(), name='blogs_api')
+    path('new/', NewPostView.as_view(), name='new_post'),
 ] + router.urls
 
