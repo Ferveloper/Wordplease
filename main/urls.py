@@ -42,6 +42,5 @@ urlpatterns = [
     path('', LatestPostsView.as_view(), name='home'),
     path('new/', NewPostView.as_view(), name='new_post'),
     # API
-    path('api/blogs/<str:username>', UserPostsAPIView.as_view(), name='user_posts')
+    path('api/posts/<str:username>', UserPostsAPIView.as_view(), name='user_posts')
 ] + router.urls
-
